@@ -1,5 +1,5 @@
 -- ============================================
--- Citizen Concern Platform - User Seeding Script
+-- Citizen Sphere Platform - User Seeding Script
 -- ============================================
 -- This script creates test users with proper ASP.NET Identity hashing
 -- Run this script after running EF migrations

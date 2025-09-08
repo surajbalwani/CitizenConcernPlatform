@@ -156,11 +156,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   getAppTitle(): string {
     if (!this.isLoggedIn()) {
-      return 'Citizen Concern Platform';
+      return 'Citizen Sphere';
     }
 
     const role = this.getRoleDisplayName();
-    return `Citizen Concern Platform - ${role} Portal`;
+    return `Citizen Sphere - ${role} Portal`;
   }
 
   showLayout(): boolean {

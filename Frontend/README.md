@@ -1,8 +1,9 @@
-# Citizen Concern Platform - Frontend
+# Citizen Sphere - Frontend
 
-Angular 19 PWA frontend for the Citizen Concern Platform, providing citizen and government portals for civic engagement.
+Angular 19 PWA frontend for the Citizen Sphere, providing citizen and government portals for civic engagement.
 
 **Built with:**
+
 - Angular 19 with Standalone Components
 - Angular Material Design
 - Angular Signals for state management
@@ -13,6 +14,7 @@ Angular 19 PWA frontend for the Citizen Concern Platform, providing citizen and 
 ## Quick Start
 
 ### Prerequisites
+
 - Node.js 18+ and npm
 - Backend API running on `https://localhost:7001`
 
@@ -28,16 +30,20 @@ ng serve --port 4202
 Navigate to `http://localhost:4202/`. The app automatically reloads when you modify source files.
 
 ### Test Accounts
+
 Use these pre-seeded accounts for testing:
 
 **Citizens:**
+
 - `citizen1@test.com` / `Citizen@123`
 - `citizen2@test.com` / `Citizen@123`
 
-**Officers:**  
+**Officers:**
+
 - `officer1@government.local` / `Officer@123`
 
 **Admins:**
+
 - `admin1@government.local` / `Admin@123`
 
 ## Code scaffolding
@@ -69,13 +75,13 @@ This creates optimized build artifacts in the `dist/` directory, ready for deplo
 ```
 src/app/
 ├── core/                    # Services, guards, models
-│   ├── services/           # API, auth, utility services  
+│   ├── services/           # API, auth, utility services
 │   ├── guards/             # Route protection
 │   └── models/             # TypeScript interfaces
 ├── pages/                   # Feature components
 │   ├── auth/               # Login, registration
 │   ├── citizen/            # Citizen portal
-│   ├── admin/              # Admin dashboard  
+│   ├── admin/              # Admin dashboard
 │   └── officer/            # Officer portal
 └── shared/                  # Reusable components
 ```
@@ -83,25 +89,29 @@ src/app/
 ## Features Implemented
 
 ### Citizen Portal
+
 - ✅ Dashboard with personal overview
 - ✅ Submit concerns with photo and GPS
 - ✅ Track submitted concerns with real-time updates
 - ✅ Nearby concerns with geolocation filtering
 - ✅ Profile management
 
-### Officer Portal  
+### Officer Portal
+
 - ✅ Concerns dashboard with filtering
 - ✅ Status management and updates
 - ✅ Profile management with performance metrics
 
 ### Admin Portal
+
 - ✅ Comprehensive analytics dashboard
 - ✅ User and concern management
 - ✅ System-wide reporting
 
 ### Technical Features
+
 - ✅ JWT authentication with role-based routing
-- ✅ Real-time API integration  
+- ✅ Real-time API integration
 - ✅ Geolocation services with HTML5 Navigator API
 - ✅ Responsive PWA design
 - ✅ Angular Material UI components

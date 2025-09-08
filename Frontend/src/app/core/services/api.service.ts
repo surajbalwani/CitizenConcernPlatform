@@ -304,26 +304,27 @@ export class ApiService {
     const httpParams = this.buildHttpParams(params);
 
     return this.http
-      .get<UserResponse[]>(`${this.apiUrl}/users`, {
+      .get<PaginatedResponse<UserResponse>>(`${this.apiUrl}/users`, {
         params: httpParams,
         observe: 'response',
         headers: this.getAuthHeaders(),
       })
       .pipe(
         map((response) => {
-          const totalCount = parseInt(
-            response.headers.get('X-Total-Count') || '0'
-          );
-          const page = parseInt(response.headers.get('X-Page') || '1');
-          const perPage = parseInt(response.headers.get('X-Per-Page') || '10');
+          return response.body as PaginatedResponse<UserResponse>;
+          // const totalCount = parseInt(
+          //   response.headers.get('X-Total-Count') || '0'
+          // );
+          // const page = parseInt(response.headers.get('X-Page') || '1');
+          // const perPage = parseInt(response.headers.get('X-Per-Page') || '10');
 
-          return {
-            data: response.body || [],
-            totalCount,
-            page,
-            perPage,
-            totalPages: Math.ceil(totalCount / perPage),
-          };
+          // return {
+          //   data: response.body || [],
+          //   totalCount,
+          //   page,
+          //   perPage,
+          //   totalPages: Math.ceil(totalCount / perPage),
+          // };
         }),
         catchError(this.handleError.bind(this))
       );
