@@ -7,23 +7,27 @@ export const routes: Routes = [
   {
     path: 'auth',
     children: [
-      { 
-        path: 'login', 
-        loadComponent: () => import('./pages/auth/login.component').then(c => c.LoginComponent) 
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./pages/auth/login.component').then((c) => c.LoginComponent),
       },
-      { 
-        path: 'register', 
-        loadComponent: () => import('./pages/auth/register.component').then(c => c.RegisterComponent) 
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./pages/auth/register.component').then(
+            (c) => c.RegisterComponent
+          ),
       },
-      { path: '', redirectTo: 'login', pathMatch: 'full' }
-    ]
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+    ],
   },
-  // Legacy login route for backward compatibility
-  { 
-    path: 'login', 
-    redirectTo: '/auth/login'
-  },
-  
+  // // Legacy login route for backward compatibility
+  // {
+  //   path: 'login',
+  //   redirectTo: '/auth/login'
+  // },
+
   // Citizen routes (mobile-optimized)
   {
     path: 'citizen',
@@ -31,29 +35,44 @@ export const routes: Routes = [
     data: { roles: ['Citizen'] },
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { 
-        path: 'dashboard', 
-        loadComponent: () => import('./pages/citizen/citizen-dashboard.component').then(c => c.CitizenDashboardComponent) 
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/citizen/citizen-dashboard.component').then(
+            (c) => c.CitizenDashboardComponent
+          ),
       },
-      { 
-        path: 'submit', 
-        loadComponent: () => import('./pages/citizen/submit-concern.component').then(c => c.SubmitConcernComponent) 
+      {
+        path: 'submit',
+        loadComponent: () =>
+          import('./pages/citizen/submit-concern.component').then(
+            (c) => c.SubmitConcernComponent
+          ),
       },
-      { 
-        path: 'track', 
-        loadComponent: () => import('./pages/citizen/track-concerns.component').then(c => c.TrackConcernsComponent) 
+      {
+        path: 'track',
+        loadComponent: () =>
+          import('./pages/citizen/track-concerns.component').then(
+            (c) => c.TrackConcernsComponent
+          ),
       },
-      { 
-        path: 'nearby', 
-        loadComponent: () => import('./pages/citizen/nearby-concerns.component').then(c => c.NearbyConcernsComponent) 
+      {
+        path: 'nearby',
+        loadComponent: () =>
+          import('./pages/citizen/nearby-concerns.component').then(
+            (c) => c.NearbyConcernsComponent
+          ),
       },
-      { 
-        path: 'profile', 
-        loadComponent: () => import('./pages/citizen/profile.component').then(c => c.CitizenProfileComponent) 
-      }
-    ]
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./pages/citizen/profile.component').then(
+            (c) => c.CitizenProfileComponent
+          ),
+      },
+    ],
   },
-  
+
   // Admin routes (full dashboard)
   {
     path: 'admin',
@@ -61,38 +80,57 @@ export const routes: Routes = [
     data: { roles: ['Admin', 'SuperAdmin', 'DepartmentHead'] },
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { 
-        path: 'dashboard', 
-        loadComponent: () => import('./pages/admin/admin-dashboard.component').then(c => c.AdminDashboardComponent) 
-      }
-    ]
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/admin/admin-dashboard.component').then(
+            (c) => c.AdminDashboardComponent
+          ),
+      },
+    ],
   },
-  
+
   // Officer routes
   {
     path: 'officer',
     canActivate: [AuthGuard, RoleGuard],
     data: { roles: ['Officer', 'DepartmentHead'] },
     children: [
-      { path: '', redirectTo: 'concerns', pathMatch: 'full' },
-      { 
-        path: 'concerns', 
-        loadComponent: () => import('./pages/officer/officer-concerns.component').then(c => c.OfficerConcernsComponent) 
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/officer/officer-dashboard.component').then(
+            (c) => c.OfficerDashboardComponent
+          ),
       },
-      { 
-        path: 'profile', 
-        loadComponent: () => import('./pages/officer/officer-profile.component').then(c => c.OfficerProfileComponent) 
-      }
-    ]
+      {
+        path: 'concerns',
+        loadComponent: () =>
+          import('./pages/officer/officer-concerns.component').then(
+            (c) => c.OfficerConcernsComponent
+          ),
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./pages/officer/officer-profile.component').then(
+            (c) => c.OfficerProfileComponent
+          ),
+      },
+    ],
   },
-  
+
   // Auto-redirect based on role
-  { 
-    path: '', 
-    loadComponent: () => import('./pages/role-redirect.component').then(c => c.RoleRedirectComponent), 
-    canActivate: [AuthGuard] 
+  {
+    path: '',
+    loadComponent: () =>
+      import('./pages/role-redirect.component').then(
+        (c) => c.RoleRedirectComponent
+      ),
+    canActivate: [AuthGuard],
   },
-  
+
   // Fallback
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];

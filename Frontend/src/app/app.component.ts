@@ -1,24 +1,27 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
-import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { UserResponse } from './core/models/api.models';
+import { AuthService } from './core/services/auth.service';
+import { LayoutService } from './core/services/layout.service';
 import { NotificationService } from './core/services/notification.service';
 import { OfflineDataService } from './core/services/offline-data.service';
-import { LayoutService } from './core/services/layout.service';
 
 @Component({
   selector: 'app-root',
   imports: [
+    CommonModule,
     RouterOutlet,
     RouterModule,
     MatToolbarModule,
@@ -28,25 +31,29 @@ import { LayoutService } from './core/services/layout.service';
     MatButtonModule,
     MatMenuModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
+  currentUser: UserResponse | null = null;
 
   constructor(
     private notificationService: NotificationService,
     private offlineDataService: OfflineDataService,
     private layoutService: LayoutService,
+    private authService: AuthService,
+    private router: Router,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
-    this.initializePWAFeatures();
-    this.setupOfflineSync();
-    this.setupNotifications();
+    this.loadCurrentUser();
+    //this.initializePWAFeatures();
+    //this.setupOfflineSync();
+    //this.setupNotifications();
   }
 
   ngOnDestroy() {
@@ -63,14 +70,14 @@ export class AppComponent implements OnInit, OnDestroy {
     // Monitor online/offline status
     this.offlineDataService.isOnline$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(isOnline => {
+      .subscribe((isOnline) => {
         if (isOnline) {
           this.snackBar.open('✅ Back online! Syncing data...', 'Close', {
-            duration: 3000
+            duration: 3000,
           });
         } else {
           this.snackBar.open('📱 Working offline', 'Close', {
-            duration: 3000
+            duration: 3000,
           });
         }
       });
@@ -78,7 +85,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // Monitor sync status
     this.offlineDataService.syncStatus$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(status => {
+      .subscribe((status) => {
         if (status.pendingCount > 0) {
           console.log(`${status.pendingCount} items pending sync`);
         }
@@ -102,7 +109,7 @@ export class AppComponent implements OnInit, OnDestroy {
       const permission = await this.notificationService.requestPermission();
       if (permission === 'granted') {
         this.snackBar.open('🔔 Notifications enabled!', 'Close', {
-          duration: 3000
+          duration: 3000,
         });
         // Subscribe to push notifications
         await this.notificationService.subscribeToNotifications();
@@ -110,5 +117,89 @@ export class AppComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.error('Failed to request notification permission:', error);
     }
+  }
+
+  private loadCurrentUser() {
+    this.currentUser = this.authService.getCurrentUser();
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  getUserDisplayName(): string {
+    if (this.currentUser) {
+      return `${this.currentUser.firstName} ${this.currentUser.lastName}`;
+    }
+    return 'User';
+  }
+
+  getRoleDisplayName(): string {
+    if (this.currentUser) {
+      switch (this.currentUser.role) {
+        case 1:
+          return 'Citizen';
+        case 2:
+          return 'Officer';
+        case 3:
+          return 'Department Head';
+        case 4:
+          return 'Admin';
+        case 5:
+          return 'Super Admin';
+        default:
+          return 'User';
+      }
+    }
+    return 'User';
+  }
+
+  getAppTitle(): string {
+    if (!this.isLoggedIn()) {
+      return 'Citizen Concern Platform';
+    }
+
+    const role = this.getRoleDisplayName();
+    return `Citizen Concern Platform - ${role} Portal`;
+  }
+
+  showLayout(): boolean {
+    // Only show the layout (toolbar + sidebar) if user is logged in
+    return this.isLoggedIn();
+  }
+
+  navigateToProfile() {
+    if (!this.currentUser) return;
+
+    switch (this.currentUser.role) {
+      case 1: // Citizen
+        this.router.navigate(['/citizen/profile']);
+        break;
+      case 2: // Officer
+      case 3: // Department Head
+        this.router.navigate(['/officer/profile']);
+        break;
+      case 4: // Admin
+      case 5: // Super Admin
+        this.router.navigate(['/admin/profile']);
+        break;
+      default:
+        this.router.navigate(['/']);
+    }
+  }
+
+  openSettings() {
+    this.snackBar.open('Settings feature coming soon!', 'Close', {
+      duration: 3000,
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.currentUser = null;
+    this.router.navigate(['/auth/login']);
+    this.snackBar.open('Successfully logged out', 'Close', {
+      duration: 3000,
+    });
   }
 }

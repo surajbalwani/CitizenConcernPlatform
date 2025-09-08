@@ -5,11 +5,11 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  role: string;
+  role: number;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private currentUser: User | null = null;
@@ -26,7 +26,7 @@ export class AuthService {
     return this.currentUser !== null;
   }
 
-  getUserRole(): string | null {
+  getUserRole(): number | null {
     return this.currentUser?.role || null;
   }
 

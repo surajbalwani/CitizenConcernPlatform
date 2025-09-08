@@ -60,7 +60,15 @@ export enum UserRole {
   Officer = 2,
   DepartmentHead = 3,
   Admin = 4,
-  SuperAdmin = 5
+  SuperAdmin = 5,
+}
+
+export interface Category {
+  name: string;
+  description: string;
+  subCategories: string[];
+  icon: string;
+  color: string;
 }
 
 // Concern Models
@@ -109,7 +117,7 @@ export enum ConcernStatus {
   UnderReview = 4,
   Resolved = 5,
   Closed = 6,
-  Rejected = 7
+  Rejected = 7,
 }
 
 export interface ConcernUpdate {
@@ -224,7 +232,7 @@ export enum NotificationType {
   StatusChange = 2,
   NewAssignment = 3,
   System = 4,
-  Reminder = 5
+  Reminder = 5,
 }
 
 // Common API Response

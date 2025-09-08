@@ -62,20 +62,36 @@ import { LoginRequest } from '../../core/models/api.models';
       min-height: 100vh;
       padding: 20px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      z-index: 1;
     }
     .login-card {
       max-width: 400px;
       width: 100%;
+      position: relative;
+      z-index: 2;
     }
     .full-width {
       width: 100%;
       margin-bottom: 16px;
+    }
+    .full-width input {
+      cursor: text;
+      pointer-events: auto;
     }
     .error-message {
       color: #f44336;
       font-size: 14px;
       margin-top: 16px;
       text-align: center;
+    }
+    mat-form-field {
+      position: relative;
+      z-index: 3;
+    }
+    mat-form-field input {
+      cursor: text !important;
+      pointer-events: auto !important;
     }
   `]
 })
