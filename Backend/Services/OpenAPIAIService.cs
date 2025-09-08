@@ -1,27 +1,12 @@
-using CitizenConcernAPI.Models;
+﻿using CitizenConcernAPI.Models;
 using System.Text.RegularExpressions;
 using System.Text.Json;
 using OpenAI.Chat;
+using Newtonsoft.Json;
 
 namespace CitizenConcernAPI.Services
 {
-    public class ClassificationResult
-    {
-        public string? Category { get; set; }
-        public float Sentiment { get; set; }
-        public int Priority { get; set; }
-        public string[]? Keywords { get; set; }
-    }   
-    public interface IAIService
-    {
-        Task<string> CategorizeConcernAsync(string title, string description);
-        Task<int> PrioritizeConcernAsync(Concern concern);
-        Task<double> AnalyzeSentimentAsync(string text);
-        ClassificationResult ClassifyConcernAsync(string title, string description);
-        Task<List<string>> ExtractKeywordsAsync(string text);
-    }
-
-    public class AIService : IAIService
+    public class OpenAPIAIService : IAIService
     {
         private readonly ILogger<AIService> _logger;
 
@@ -39,7 +24,7 @@ namespace CitizenConcernAPI.Services
             { "Housing", new List<string> { "housing", "home", "building", "construction", "apartment", "slum", "rent", "maintenance" } }
         };
 
-        public AIService(ILogger<AIService> logger)
+        public OpenAPIAIService(ILogger<AIService> logger)
         {
             _logger = logger;
         }
@@ -63,6 +48,7 @@ namespace CitizenConcernAPI.Services
                 }
 
                 var bestCategory = scores.OrderByDescending(x => x.Value).FirstOrDefault();
+
                 return bestCategory.Value > 0 ? bestCategory.Key : "General";
             }
             catch (Exception ex)
@@ -80,14 +66,14 @@ namespace CitizenConcernAPI.Services
 
                 var urgentKeywords = new[] { "urgent", "emergency", "immediate", "critical", "danger", "life", "death", "fire", "accident" };
                 var text = $"{concern.Title} {concern.Description}".ToLower();
-                
+
                 var hasUrgentKeywords = urgentKeywords.Any(keyword => text.Contains(keyword));
                 if (hasUrgentKeywords) priorityScore = 5;
 
                 if (concern.UpVotes > 10) priorityScore = Math.Max(priorityScore, 4);
                 if (concern.UpVotes > 50) priorityScore = 5;
 
-                if (concern.Category == "Health" || concern.Category == "Safety") 
+                if (concern.Category == "Health" || concern.Category == "Safety")
                     priorityScore = Math.Max(priorityScore, 4);
 
                 var sentimentScore = await AnalyzeSentimentAsync(text);
@@ -110,7 +96,7 @@ namespace CitizenConcernAPI.Services
                 var negativeWords = new[] { "bad", "terrible", "awful", "horrible", "disgusting", "hate", "angry", "frustrated", "disappointed", "sad", "poor", "worst" };
 
                 var words = text.ToLower().Split(new[] { ' ', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
-                
+
                 var positiveScore = words.Count(word => positiveWords.Contains(word));
                 var negativeScore = words.Count(word => negativeWords.Contains(word));
 
@@ -151,17 +137,51 @@ namespace CitizenConcernAPI.Services
 
         private bool IsStopWord(string word)
         {
-            var stopWords = new HashSet<string> 
-            { 
-                "the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for", "of", "with", "by", 
-                "this", "that", "these", "those", "is", "are", "was", "were", "be", "been", "have", "has", "had" 
+            var stopWords = new HashSet<string>
+            {
+                "the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for", "of", "with", "by",
+                "this", "that", "these", "those", "is", "are", "was", "were", "be", "been", "have", "has", "had"
             };
             return stopWords.Contains(word);
         }
 
         public ClassificationResult ClassifyConcernAsync(string title, string description)
         {
-            throw new NotImplementedException();
+            var prompt = $@"
+                You are a classification assistant.
+
+                categories:
+                divide into the catgories defined in sustainable development goals specified by UN,
+                can be found on https://sdgs.un.org/goals
+
+                Task:
+                - Classify the following concern into one category above.
+                - Give a sentiment score between -1.0 (max negative sentiment) and 1.0 (max positive sentiment).
+                - Give a priority between 0 (not urgent) and 5 (extremely urgent).
+                - List of all the keywords that helped the concern classify into a category.
+
+                Concern:
+                Title: {title}
+                Description: {description}
+
+                Respond ONLY in JSON format:
+                {{
+                    ""category"": ""one of the categories"",
+                    ""sentiment"": floating point numbet between -1.0 to 1.0,
+                    ""priority"": number 1-5,
+                    ""keywords"": [""list"", ""of"", ""keywords""]
+                }}
+                ";
+            ChatClient client = new(
+                model: "gpt-5",
+                apiKey: "<OpenAI-ApiKey>"
+            );
+
+            ChatCompletion completion = client.CompleteChat(prompt);
+            Console.WriteLine($"[ASSISTANT]: {completion.Content[0].Text}");
+            ClassificationResult result = JsonConvert.DeserializeObject<ClassificationResult>(completion.Content[0].Text)!;
+
+            return result;
         }
     }
 

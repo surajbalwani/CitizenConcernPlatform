@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddScoped<IAIService, AIService>();
+builder.Services.AddScoped<IAIService, OpenAPIAIService>();
 builder.Services.AddScoped<IRewardService, RewardService>();
 builder.Services.AddScoped<ISDGService, SDGService>();
 

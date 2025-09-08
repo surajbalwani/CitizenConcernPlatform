@@ -127,16 +127,11 @@ namespace CitizenConcernAPI.Controllers
                     };
                 }
 
-                var category = await _aiService.CategorizeConcernAsync(concern.Title, concern.Description);
-                concern.Category = category;
-
-                var sentiment = await _aiService.AnalyzeSentimentAsync($"{concern.Title} {concern.Description}");
-                concern.SentimentScore = sentiment;
-
-                concern.Priority = await _aiService.PrioritizeConcernAsync(concern);
-
-                var keywords = await _aiService.ExtractKeywordsAsync($"{concern.Title} {concern.Description}");
-                concern.Tags = keywords.Take(5).ToList();
+                var result = _aiService.ClassifyConcernAsync(concern.Title, concern.Description);
+                concern.Category = result.Category ?? string.Empty;
+                concern.SentimentScore = result.Sentiment;
+                concern.Priority = result.Priority;
+                concern.Tags = result.Keywords?.Take(5).ToList() ?? [];
 
                 _context.Concerns.Add(concern);
                 await _context.SaveChangesAsync();
