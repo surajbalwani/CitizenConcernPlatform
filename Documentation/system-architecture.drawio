@@ -1,0 +1,407 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.2.0">
+  <diagram id="9TFZRl3lLOcMc0kRzaqM" name="Page-1">
+    <mxGraphModel dx="1426" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="2000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="main-title" value="CitizenConcernPlatform - Complete System Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#2e7d32;" parent="1" vertex="1">
+          <mxGeometry x="300" y="20" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="highlevel-section" value="HIGH-LEVEL SYSTEM OVERVIEW" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#2e7d32;fontSize=16;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="80" width="1310" height="490" as="geometry">
+            <mxRectangle x="40" y="80" width="300" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hl-citizens" value="Citizens" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="150" y="50" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="hl-officials" value="Government&#xa;Officials" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="350" y="50" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="hl-webapp" value="Angular 19 PWA&#xa;Web Application" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="220" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="hl-api" value=".NET Core 8.0&#xa;REST API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="220" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="hl-business" value="Business Logic&#xa;Services" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="120" y="380" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="hl-ai" value="AI/ML Service&#xa;(Mock)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="290" y="380" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="hl-database" value="SQL Server&#xa;Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#e6f3ff;strokeColor=#0066cc;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="490" y="370" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="hl-external" value="External Services&#xa;(Email, Maps, etc.)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffebee;strokeColor=#d32f2f;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="570" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="features-box" value="Key System Features" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f0f8f0;strokeColor=#28a745;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="750" y="50" width="530" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="feature1" value="• Role-based Authentication (5 levels)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="10" y="30" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature2" value="• Concern Submission with Geolocation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="10" y="50" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature3" value="• AI-powered Categorization (Mock)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="10" y="70" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature4" value="• Real-time Status Tracking" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="10" y="90" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature5" value="• Progressive Web App (PWA)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="270" y="30" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature6" value="• Analytics Dashboard" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="270" y="50" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature7" value="• Voting and Priority System" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="270" y="70" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature8" value="• Mobile-Responsive Design" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="270" y="90" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature9" value="• Department Assignment Workflow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="10" y="110" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature10" value="• Multi-step Concern Wizard" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="features-box" vertex="1">
+          <mxGeometry x="270" y="110" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-stack-box" value="Technology Stack" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#ff8f00;" parent="highlevel-section" vertex="1">
+          <mxGeometry x="750" y="240" width="530" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-frontend" value="Frontend: Angular 19, TypeScript, Material UI, Leaflet Maps, Chart.js" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="tech-stack-box" vertex="1">
+          <mxGeometry x="10" y="30" width="510" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-backend" value="Backend: .NET Core 8.0, Entity Framework, ASP.NET Identity, AutoMapper" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="tech-stack-box" vertex="1">
+          <mxGeometry x="10" y="50" width="510" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-database" value="Database: SQL Server LocalDB, NetTopologySuite, JSON columns" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="tech-stack-box" vertex="1">
+          <mxGeometry x="10" y="70" width="510" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tech-tools" value="Tools: Swagger/OpenAPI, ag-Grid, PWA Service Worker, JWT Authentication" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="tech-stack-box" vertex="1">
+          <mxGeometry x="10" y="90" width="510" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="highlevel-section" source="hl-citizens" target="hl-webapp" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="200" as="sourcePoint" />
+            <mxPoint x="250" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow2" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="highlevel-section" source="hl-officials" target="hl-webapp" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="200" as="sourcePoint" />
+            <mxPoint x="250" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow3" value="HTTP/HTTPS&#xa;JWT Auth" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="highlevel-section" source="hl-webapp" target="hl-api" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="200" as="sourcePoint" />
+            <mxPoint x="250" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow4" value="" style="endArrow=classic;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="highlevel-section" source="hl-api" target="hl-business" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="300" as="sourcePoint" />
+            <mxPoint x="250" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow5" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="highlevel-section" source="hl-api" target="hl-ai" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="300" as="sourcePoint" />
+            <mxPoint x="250" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow6" value="Entity Framework&#xa;Core 8.0" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=52.5;entryPerimeter=0;" parent="highlevel-section" source="hl-business" target="hl-database" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="400" as="sourcePoint" />
+            <mxPoint x="250" y="350" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="250" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow7" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="highlevel-section" source="hl-ai" target="hl-database" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="400" as="sourcePoint" />
+            <mxPoint x="250" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow8" value="REST API Calls&#xa;(Planned)" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="highlevel-section" source="hl-api" target="hl-external" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="400" as="sourcePoint" />
+            <mxPoint x="250" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frontend-section" value="FRONTEND LAYER - Angular 19 PWA" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;fontStyle=1;" parent="1" vertex="1" collapsed="1">
+          <mxGeometry x="30" y="700" width="320" height="30" as="geometry">
+            <mxRectangle x="30" y="700" width="1300" height="220" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="citizen-portal" value="Citizen Portal&#xa;(Dashboard, Submit, Track)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="frontend-section" vertex="1">
+          <mxGeometry x="30" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="officer-portal" value="Officer Portal&#xa;(Concern Management)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="frontend-section" vertex="1">
+          <mxGeometry x="190" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-portal" value="Admin Portal&#xa;(Analytics, User Mgmt)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="frontend-section" vertex="1">
+          <mxGeometry x="350" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-components" value="Auth System&#xa;(JWT, Role Guards)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="frontend-section" vertex="1">
+          <mxGeometry x="510" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pwa-features" value="PWA Features&#xa;(Service Worker, Offline)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="frontend-section" vertex="1">
+          <mxGeometry x="670" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="routing-guards" value="Routing Guards&#xa;(Role-based Access)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="frontend-section" vertex="1">
+          <mxGeometry x="830" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="interceptors" value="HTTP Interceptors&#xa;(Auth, Error Handling)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="frontend-section" vertex="1">
+          <mxGeometry x="990" y="40" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-components" value="Angular Material&#xa;Components" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="frontend-section" vertex="1">
+          <mxGeometry x="30" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="maps-charts" value="Leaflet Maps&#xa;Chart.js Analytics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="frontend-section" vertex="1">
+          <mxGeometry x="170" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="data-grid" value="ag-Grid&#xa;Advanced Tables" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="frontend-section" vertex="1">
+          <mxGeometry x="310" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="services" value="Angular Services&#xa;(API, Auth, Location)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="frontend-section" vertex="1">
+          <mxGeometry x="450" y="130" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="state-mgmt" value="State Management&#xa;(Signals, RxJS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="frontend-section" vertex="1">
+          <mxGeometry x="610" y="130" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="form-validation" value="Form Validation&#xa;(Reactive Forms)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="frontend-section" vertex="1">
+          <mxGeometry x="770" y="130" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="responsive" value="Responsive Design&#xa;Mobile First PWA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="frontend-section" vertex="1">
+          <mxGeometry x="930" y="130" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="api-gateway-section" value="API COMMUNICATION LAYER" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=16;fontStyle=1;" parent="1" vertex="1" collapsed="1">
+          <mxGeometry x="30" y="960" width="260" height="30" as="geometry">
+            <mxRectangle x="30" y="960" width="1300" height="100" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="http-client" value="HTTP Client&#xa;(Angular HttpClient)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="api-gateway-section" vertex="1">
+          <mxGeometry x="50" y="30" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="jwt-tokens" value="JWT Token&#xa;Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="api-gateway-section" vertex="1">
+          <mxGeometry x="220" y="30" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="error-handling" value="Error Handling&#xa;Global Interceptor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="api-gateway-section" vertex="1">
+          <mxGeometry x="390" y="30" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="loading-states" value="Loading States&#xa;Spinner Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="api-gateway-section" vertex="1">
+          <mxGeometry x="560" y="30" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cors-config" value="CORS Configuration&#xa;Cross-Origin Requests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="api-gateway-section" vertex="1">
+          <mxGeometry x="730" y="30" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="api-versioning" value="API Versioning&#xa;v1 Endpoints" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="api-gateway-section" vertex="1">
+          <mxGeometry x="900" y="30" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="response-caching" value="Response Caching&#xa;Performance Optimization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#ff8f00;" parent="api-gateway-section" vertex="1">
+          <mxGeometry x="1070" y="30" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="backend-section" value="BACKEND API LAYER - .NET Core 8.0" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=16;fontStyle=1;" parent="1" vertex="1" collapsed="1">
+          <mxGeometry x="30" y="1110" width="320" height="30" as="geometry">
+            <mxRectangle x="30" y="1110" width="1300" height="280" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="auth-controller" value="AuthController&#xa;JWT, Register, Login,&#xa;Password Reset" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="backend-section" vertex="1">
+          <mxGeometry x="30" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="concerns-controller" value="ConcernsController&#xa;CRUD, Status Updates,&#xa;Voting, Comments" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="backend-section" vertex="1">
+          <mxGeometry x="190" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="analytics-controller" value="AnalyticsController&#xa;Reports, Metrics,&#xa;Dashboard Data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="backend-section" vertex="1">
+          <mxGeometry x="350" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="users-controller" value="UsersController&#xa;Admin Management,&#xa;Role Assignment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="backend-section" vertex="1">
+          <mxGeometry x="510" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="categories-controller" value="CategoriesController&#xa;Departments,&#xa;Concern Types" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="backend-section" vertex="1">
+          <mxGeometry x="670" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="notifications-controller" value="NotificationsController&#xa;Push Notifications,&#xa;Email Alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="backend-section" vertex="1">
+          <mxGeometry x="830" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="files-controller" value="FilesController&#xa;Upload, Download,&#xa;Media Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="backend-section" vertex="1">
+          <mxGeometry x="990" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ai-service-mock" value="AI Service (Mock)&#xa;Categorization,&#xa;Sentiment Analysis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="backend-section" vertex="1">
+          <mxGeometry x="30" y="130" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="identity-service" value="ASP.NET Identity&#xa;User Management,&#xa;Role System" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="backend-section" vertex="1">
+          <mxGeometry x="190" y="130" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="geospatial-service" value="NetTopologySuite&#xa;Geographic Data,&#xa;Spatial Queries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="backend-section" vertex="1">
+          <mxGeometry x="350" y="130" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="email-service" value="Email Service&#xa;SMTP Configuration,&#xa;Templates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="backend-section" vertex="1">
+          <mxGeometry x="510" y="130" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="notification-service" value="Notification Service&#xa;Push Notifications,&#xa;Real-time Updates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="backend-section" vertex="1">
+          <mxGeometry x="670" y="130" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="file-service" value="File Storage Service&#xa;Azure Blob/Local,&#xa;Image Processing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="backend-section" vertex="1">
+          <mxGeometry x="830" y="130" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="logging-service" value="Logging Service&#xa;Serilog, Application&#xa;Insights Integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="backend-section" vertex="1">
+          <mxGeometry x="990" y="130" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="automapper" value="AutoMapper&#xa;Entity to DTO&#xa;Mapping" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="backend-section" vertex="1">
+          <mxGeometry x="110" y="220" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="swagger" value="Swagger/OpenAPI&#xa;API Documentation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="backend-section" vertex="1">
+          <mxGeometry x="260" y="220" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="jwt-config" value="JWT Configuration&#xa;Token Generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="backend-section" vertex="1">
+          <mxGeometry x="410" y="220" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cors-policy" value="CORS Policy&#xa;Cross-Origin Config" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="backend-section" vertex="1">
+          <mxGeometry x="560" y="220" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="validation" value="Model Validation&#xa;Data Annotations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="backend-section" vertex="1">
+          <mxGeometry x="710" y="220" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="middleware" value="Custom Middleware&#xa;Request Processing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="backend-section" vertex="1">
+          <mxGeometry x="860" y="220" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dependency-injection" value="Dependency Injection&#xa;Service Configuration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="backend-section" vertex="1">
+          <mxGeometry x="1010" y="220" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="data-access-section" value="DATA ACCESS LAYER - Entity Framework Core 8.0" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f3e2f3;strokeColor=#d5739d;fontSize=16;fontStyle=1;" parent="1" vertex="1" collapsed="1">
+          <mxGeometry x="30" y="1430" width="410" height="30" as="geometry">
+            <mxRectangle x="30" y="1430" width="1300" height="160" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="application-dbcontext" value="ApplicationDbContext&#xa;EF Core Configuration,&#xa;Code First Approach" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="data-access-section" vertex="1">
+          <mxGeometry x="50" y="40" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="database-seeder" value="DatabaseSeeder&#xa;Test Data Generation,&#xa;Initial Setup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="data-access-section" vertex="1">
+          <mxGeometry x="240" y="40" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="migrations" value="EF Migrations&#xa;Schema Management,&#xa;Auto-apply on Startup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="data-access-section" vertex="1">
+          <mxGeometry x="430" y="40" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="repository-pattern" value="Repository Pattern&#xa;Generic CRUD Operations,&#xa;Unit of Work" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="data-access-section" vertex="1">
+          <mxGeometry x="620" y="40" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="query-optimization" value="Query Optimization&#xa;Include Strategies,&#xa;Lazy Loading" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="data-access-section" vertex="1">
+          <mxGeometry x="810" y="40" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="connection-pooling" value="Connection Pooling&#xa;Performance Optimization,&#xa;SQL Server Config" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="data-access-section" vertex="1">
+          <mxGeometry x="1000" y="40" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="database-section" value="DATABASE LAYER - SQL Server LocalDB" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e6f3ff;strokeColor=#0066cc;fontSize=16;fontStyle=1;" parent="1" vertex="1" collapsed="1">
+          <mxGeometry x="30" y="1630" width="340" height="30" as="geometry">
+            <mxRectangle x="30" y="1630" width="1300" height="280" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="identity-tables" value="Identity Tables&#xa;Users, Roles, Claims&#xa;ASP.NET Identity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="database-section" vertex="1">
+          <mxGeometry x="50" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="concerns-table" value="Concerns Table&#xa;Main Entity, Status,&#xa;Geographic Data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="database-section" vertex="1">
+          <mxGeometry x="220" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="comments-updates" value="Comments and Updates&#xa;Tracking History,&#xa;Status Changes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="database-section" vertex="1">
+          <mxGeometry x="390" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="departments-table" value="Departments Table&#xa;Government Entities,&#xa;Category Mapping" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="database-section" vertex="1">
+          <mxGeometry x="560" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="notifications-table" value="User Notifications&#xa;System Messages,&#xa;Read Status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="database-section" vertex="1">
+          <mxGeometry x="730" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="analytics-tables" value="Analytics Tables&#xa;Metrics, SDG Data,&#xa;Performance Stats" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="database-section" vertex="1">
+          <mxGeometry x="900" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="audit-logs" value="Audit Logs&#xa;System Activity,&#xa;Change Tracking" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="database-section" vertex="1">
+          <mxGeometry x="1070" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="spatial-data" value="Spatial Data Support&#xa;NetTopologySuite&#xa;Geographic Queries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="database-section" vertex="1">
+          <mxGeometry x="130" y="130" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="json-columns" value="JSON Data Storage&#xa;Tags, URLs, Metadata&#xa;Flexible Schema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="database-section" vertex="1">
+          <mxGeometry x="320" y="130" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="indexes" value="Database Indexes&#xa;Performance Optimization&#xa;Query Acceleration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="database-section" vertex="1">
+          <mxGeometry x="510" y="130" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="constraints" value="Foreign Key Constraints&#xa;Data Integrity,&#xa;Referential Integrity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="database-section" vertex="1">
+          <mxGeometry x="700" y="130" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="triggers" value="Database Triggers&#xa;Automatic Updates,&#xa;Audit Trail" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="database-section" vertex="1">
+          <mxGeometry x="890" y="130" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="backup-strategy" value="Backup Strategy&#xa;LocalDB Limitations,&#xa;Data Protection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="database-section" vertex="1">
+          <mxGeometry x="200" y="220" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="data-encryption" value="Data Encryption&#xa;Sensitive Information&#xa;SQL Server Features" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="database-section" vertex="1">
+          <mxGeometry x="380" y="220" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="connection-security" value="Connection Security&#xa;Encrypted Connections&#xa;Authentication" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="database-section" vertex="1">
+          <mxGeometry x="560" y="220" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="performance-monitoring" value="Performance Monitoring&#xa;Query Analysis,&#xa;Index Usage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="database-section" vertex="1">
+          <mxGeometry x="740" y="220" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="scalability" value="Scalability Considerations&#xa;Migration Path to&#xa;Production SQL Server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="database-section" vertex="1">
+          <mxGeometry x="920" y="220" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="external-section" value="EXTERNAL SERVICES INTEGRATION" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffebee;strokeColor=#d32f2f;fontSize=16;fontStyle=1;" parent="1" vertex="1" collapsed="1">
+          <mxGeometry x="30" y="1970" width="320" height="30" as="geometry">
+            <mxRectangle x="30" y="1970" width="1300" height="130" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="email-smtp" value="Email Service&#xa;SendGrid/SMTP&#xa;Password Reset, Notifications" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="external-section" vertex="1">
+          <mxGeometry x="50" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="file-storage-cloud" value="Cloud Storage&#xa;Azure Blob/AWS S3&#xa;File Upload Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="external-section" vertex="1">
+          <mxGeometry x="220" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="push-notifications-svc" value="Push Notifications&#xa;Firebase/Azure&#xa;Real-time Alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="external-section" vertex="1">
+          <mxGeometry x="390" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="maps-api-svc" value="Maps API&#xa;OpenStreetMap/Google&#xa;Geolocation Services" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="external-section" vertex="1">
+          <mxGeometry x="560" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="real-ai-svc" value="AI/ML Services&#xa;Azure Cognitive/OpenAI&#xa;Text Analysis, Translation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="external-section" vertex="1">
+          <mxGeometry x="730" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sms-service" value="SMS Service&#xa;Twilio/Azure&#xa;Mobile Notifications" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="external-section" vertex="1">
+          <mxGeometry x="900" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="analytics-external" value="Analytics Services&#xa;Application Insights&#xa;Performance Monitoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="external-section" vertex="1">
+          <mxGeometry x="1070" y="40" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-section" value="IMPLEMENTATION STATUS LEGEND" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=16;fontStyle=1;" parent="1" vertex="1" collapsed="1">
+          <mxGeometry x="30" y="2140" width="320" height="30" as="geometry">
+            <mxRectangle x="30" y="2140" width="1300" height="120" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="implemented" value="✅ Fully Implemented and Working" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1" parent="legend-section" vertex="1">
+          <mxGeometry x="50" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="partial" value="⚠️ Partially Implemented or Mock Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1" parent="legend-section" vertex="1">
+          <mxGeometry x="280" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="planned" value="🔴 Planned but Not Yet Implemented" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1" parent="legend-section" vertex="1">
+          <mxGeometry x="510" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="core-tech" value="🔧 Core Technology Stack Component" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" parent="legend-section" vertex="1">
+          <mxGeometry x="740" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="infrastructure" value="🏗️ Infrastructure and Configuration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1" parent="legend-section" vertex="1">
+          <mxGeometry x="970" y="40" width="200" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
