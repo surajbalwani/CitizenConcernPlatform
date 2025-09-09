@@ -139,4 +139,14 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+// Bind to PORT environment variable only in Production (for Heroku compatibility)
+if (app.Environment.IsProduction())
+{
+    var port = Environment.GetEnvironmentVariable("PORT");
+    if (!string.IsNullOrEmpty(port))
+    {
+        app.Run($"http://0.0.0.0:{port}");
+        return;
+    }
+}
 app.Run();
