@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
@@ -41,6 +42,7 @@ import { LayoutService } from '../../core/services/layout.service';
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
+    MatProgressBarModule,
     FormsModule,
   ],
   template: `
@@ -454,6 +456,88 @@ import { LayoutService } from '../../core/services/layout.service';
               }
             </div>
           </mat-tab>
+
+          <mat-tab label="SDG Progress">
+            <div class="tab-content">
+              @if (sdgProgress() === null) {
+              <div class="loading-sdg">
+                <mat-spinner diameter="30"></mat-spinner>
+                <p>Loading SDG progress data...</p>
+              </div>
+              } @else {
+              <div class="sdg-grid">
+                @for (sdg of sdgProgress(); track sdg.id) {
+                <mat-card class="sdg-card" [class]="getSdgCardClass(sdg)">
+                  <mat-card-header class="sdg-card-header">
+                    <div class="sdg-icon">
+                      <mat-icon>{{ getSdgIcon(sdg.sdgGoal) }}</mat-icon>
+                    </div>
+                    <div class="sdg-title-section">
+                      <mat-card-title class="sdg-goal">{{ sdg.sdgGoal }}</mat-card-title>
+                      <mat-card-subtitle class="sdg-target">{{ sdg.sdgTarget }}</mat-card-subtitle>
+                    </div>
+                  </mat-card-header>
+                  <mat-card-content class="sdg-content">
+                    <div class="progress-section">
+                      <div class="progress-header">
+                        <span class="progress-label">Progress</span>
+                        <span class="progress-value">{{ sdg.progressPercentage }}%</span>
+                      </div>
+                      <mat-progress-bar 
+                        [value]="sdg.progressPercentage" 
+                        mode="determinate"
+                        [class]="getProgressBarClass(sdg.progressPercentage)">
+                      </mat-progress-bar>
+                    </div>
+                    
+                    <div class="stats-row">
+                      <div class="stat-item">
+                        <div class="stat-number">{{ sdg.relatedConcerns }}</div>
+                        <div class="stat-label">Related Concerns</div>
+                      </div>
+                      <div class="stat-item">
+                        <div class="stat-number resolved">{{ sdg.resolvedConcerns }}</div>
+                        <div class="stat-label">Resolved</div>
+                      </div>
+                    </div>
+                    
+                    <div class="last-updated">
+                      <mat-icon class="update-icon">schedule</mat-icon>
+                      Last updated: {{ sdg.lastUpdated | date:'short' }}
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+                }
+              </div>
+              
+              <!-- SDG Summary -->
+              <div class="sdg-summary">
+                <h3 class="summary-title">
+                  <mat-icon>analytics</mat-icon>
+                  Overall SDG Impact Summary
+                </h3>
+                <div class="summary-stats">
+                  <div class="summary-item">
+                    <div class="summary-number">{{ getTotalConcerns() }}</div>
+                    <div class="summary-label">Total SDG-Related Concerns</div>
+                  </div>
+                  <div class="summary-item">
+                    <div class="summary-number resolved">{{ getTotalResolved() }}</div>
+                    <div class="summary-label">Total Resolved</div>
+                  </div>
+                  <div class="summary-item">
+                    <div class="summary-number">{{ getAverageProgress() }}%</div>
+                    <div class="summary-label">Average Progress</div>
+                  </div>
+                  <div class="summary-item">
+                    <div class="summary-number">{{ getActiveGoals() }}</div>
+                    <div class="summary-label">Active Goals</div>
+                  </div>
+                </div>
+              </div>
+              }
+            </div>
+          </mat-tab>
         </mat-tab-group>
       </mat-card>
     </div>
@@ -713,6 +797,257 @@ import { LayoutService } from '../../core/services/layout.service';
         .detailed-analytics {
           grid-template-columns: 1fr;
         }
+
+        .sdg-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .summary-stats {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .stats-row {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+
+        .sdg-card-header {
+          padding: 12px 12px 6px 12px;
+          flex-direction: row;
+          align-items: flex-start;
+          text-align: left;
+          gap: 10px;
+        }
+
+        .sdg-content {
+          padding: 0 12px 12px 12px;
+        }
+
+        .sdg-summary {
+          padding: 16px;
+        }
+      }
+
+      /* SDG Progress Styles */
+      .loading-sdg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px;
+        gap: 12px;
+      }
+
+      .sdg-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .sdg-card {
+        border: 1px solid #e0e0e0;
+        overflow: hidden;
+        background: white;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+
+      .sdg-card .mat-mdc-card {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+
+      /* Override Material Design defaults for SDG section */
+      .sdg-grid mat-card,
+      .sdg-grid .mat-mdc-card,
+      .sdg-summary mat-card,
+      .sdg-summary .mat-mdc-card {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+
+      .sdg-card-header {
+        padding: 16px 16px 8px 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .sdg-icon {
+        background: #f5f5f5;
+        border: 1px solid #e0e0e0;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+      }
+
+      .sdg-icon mat-icon {
+        color: #1976d2;
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+
+      .sdg-title-section {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .sdg-goal {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 2px;
+        color: #1976d2;
+        line-height: 1.2;
+      }
+
+      .sdg-target {
+        font-size: 0.8rem;
+        color: #666;
+        line-height: 1.3;
+        margin: 0;
+      }
+
+      .sdg-content {
+        padding: 0 16px 16px 16px;
+      }
+
+      .progress-section {
+        margin-bottom: 16px;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .progress-label {
+        font-weight: 500;
+        color: #333;
+      }
+
+      .progress-value {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #1976d2;
+      }
+
+      .progress-excellent .mat-mdc-progress-bar-fill::after {
+        background-color: #4caf50 !important;
+      }
+
+      .progress-good .mat-mdc-progress-bar-fill::after {
+        background-color: #2196f3 !important;
+      }
+
+      .progress-fair .mat-mdc-progress-bar-fill::after {
+        background-color: #ff9800 !important;
+      }
+
+      .progress-needs-attention .mat-mdc-progress-bar-fill::after {
+        background-color: #f44336 !important;
+      }
+
+      .stats-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 8px;
+        background: #fafafa;
+        border: 1px solid #e0e0e0;
+      }
+
+      .stat-number {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #333;
+        line-height: 1;
+      }
+
+      .stat-number.resolved {
+        color: #4caf50;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+        color: #666;
+        margin-top: 2px;
+        font-weight: 500;
+      }
+
+      .last-updated {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        color: #888;
+        padding: 6px 8px;
+        background: #f8f8f8;
+        border: 1px solid #e0e0e0;
+      }
+
+      .update-icon {
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+      }
+
+      .sdg-summary {
+        background: #fafafa;
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+      }
+
+      .summary-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 16px 0;
+        color: #1976d2;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      .summary-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 16px;
+      }
+
+      .summary-item {
+        text-align: center;
+        padding: 16px;
+        background: white;
+        border: 1px solid #e0e0e0;
+      }
+
+      .summary-number {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1976d2;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .summary-number.resolved {
+        color: #4caf50;
+      }
+
+      .summary-label {
+        font-size: 0.85rem;
+        color: #666;
+        font-weight: 500;
+        line-height: 1.2;
       }
     `,
   ],
@@ -734,6 +1069,7 @@ export class AdminDashboardComponent implements OnInit {
     totalPages: 0,
   });
   availableCategories = signal<string[]>([]);
+  sdgProgress = signal<any>(null);
 
   isLoadingAnalytics = signal(false);
   isLoadingConcerns = signal(false);
@@ -770,6 +1106,7 @@ export class AdminDashboardComponent implements OnInit {
     this.loadAnalytics();
     this.loadConcerns();
     this.loadCategories();
+    this.loadSdgProgress();
 
     if (this.authService.canManageUsers()) {
       this.loadUsers();
@@ -943,5 +1280,63 @@ export class AdminDashboardComponent implements OnInit {
     if (confirm('Are you sure you want to delete this concern?')) {
       console.log('Delete concern:', concern);
     }
+  }
+
+  // SDG Progress Methods
+  private loadSdgProgress() {
+    this.apiService.getSdgProgress().subscribe({
+      next: (data) => {
+        console.log('SDG Progress Data:', data);
+        this.sdgProgress.set(data);
+      },
+      error: (error) => {
+        console.error('Failed to load SDG progress data:', error);
+        this.sdgProgress.set(null);
+      }
+    });
+  }
+
+  getSdgIcon(sdgGoal: string): string {
+    if (sdgGoal.includes('Health')) return 'health_and_safety';
+    if (sdgGoal.includes('Water')) return 'water_drop';
+    if (sdgGoal.includes('Cities')) return 'location_city';
+    if (sdgGoal.includes('Climate')) return 'eco';
+    return 'public';
+  }
+
+  getSdgCardClass(sdg: any): string {
+    if (sdg.progressPercentage >= 75) return 'sdg-excellent';
+    if (sdg.progressPercentage >= 50) return 'sdg-good';
+    if (sdg.progressPercentage >= 25) return 'sdg-fair';
+    return 'sdg-needs-attention';
+  }
+
+  getProgressBarClass(percentage: number): string {
+    if (percentage >= 75) return 'progress-excellent';
+    if (percentage >= 50) return 'progress-good';
+    if (percentage >= 25) return 'progress-fair';
+    return 'progress-needs-attention';
+  }
+
+  getTotalConcerns(): number {
+    const sdgData = this.sdgProgress();
+    return sdgData ? sdgData.reduce((total: number, sdg: any) => total + sdg.relatedConcerns, 0) : 0;
+  }
+
+  getTotalResolved(): number {
+    const sdgData = this.sdgProgress();
+    return sdgData ? sdgData.reduce((total: number, sdg: any) => total + sdg.resolvedConcerns, 0) : 0;
+  }
+
+  getAverageProgress(): number {
+    const sdgData = this.sdgProgress();
+    if (!sdgData || sdgData.length === 0) return 0;
+    const total = sdgData.reduce((sum: number, sdg: any) => sum + sdg.progressPercentage, 0);
+    return Math.round(total / sdgData.length);
+  }
+
+  getActiveGoals(): number {
+    const sdgData = this.sdgProgress();
+    return sdgData ? sdgData.filter((sdg: any) => sdg.relatedConcerns > 0).length : 0;
   }
 }

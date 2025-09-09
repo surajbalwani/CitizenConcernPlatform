@@ -299,6 +299,14 @@ export class ApiService {
       .pipe(catchError(this.handleError.bind(this)));
   }
 
+  getSdgProgress(): Observable<any> {
+    return this.http
+      .get<any>(`${this.apiUrl}/analytics/sdg-progress`, {
+        headers: this.getAuthHeaders(),
+      })
+      .pipe(catchError(this.handleError.bind(this)));
+  }
+
   // User Management (Admin only)
   getUsers(params?: QueryParams): Observable<PaginatedResponse<UserResponse>> {
     const httpParams = this.buildHttpParams(params);
