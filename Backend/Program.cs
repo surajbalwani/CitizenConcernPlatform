@@ -7,6 +7,8 @@ using CitizenConcernAPI.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Diagnostics;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -137,16 +139,20 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, "An error occurred while migrating or seeding the database.");
         throw; // Re-throw to prevent app from starting with incomplete setup
     }
+
+    {
+        var port = Environment.GetEnvironmentVariable("PORT");
+        logger.LogInformation("PORT environment variable: {Port}", port);
+        //var port1 = Process.en.PORT || 3000;
+        if (!string.IsNullOrEmpty(port))
+        {
+            app.Run($"http://0.0.0.0:{port}");
+            return;
+        }
+    }
 }
 
 // Bind to PORT environment variable only in Production (for Heroku compatibility)
 if (app.Environment.IsProduction())
-{
-    var port = Environment.GetEnvironmentVariable("PORT");
-    if (!string.IsNullOrEmpty(port))
-    {
-        app.Run($"http://0.0.0.0:{port}");
-        return;
-    }
-}
+
 app.Run();
