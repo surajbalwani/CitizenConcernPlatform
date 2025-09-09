@@ -37,6 +37,7 @@ import { OfflineDataService } from './core/services/offline-data.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
+
   private destroy$ = new Subject<void>();
   currentUser: UserResponse | null = null;
 

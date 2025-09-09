@@ -64,7 +64,7 @@ interface DashboardStats {
 
       <!-- Statistics Cards -->
       <div class="stats-grid">
-        <mat-card class="stat-card">
+        <mat-card class="stat-card" [class.active]="isFilterActive('total')" (click)="filterConcerns('total')">
           <mat-card-content>
             <div class="stat-content">
               <mat-icon class="stat-icon" color="primary">receipt</mat-icon>
@@ -76,7 +76,7 @@ interface DashboardStats {
           </mat-card-content>
         </mat-card>
 
-        <mat-card class="stat-card">
+        <mat-card class="stat-card" [class.active]="isFilterActive('inProgress')" (click)="filterConcerns('inProgress')">
           <mat-card-content>
             <div class="stat-content">
               <mat-icon class="stat-icon" color="warn">schedule</mat-icon>
@@ -88,7 +88,7 @@ interface DashboardStats {
           </mat-card-content>
         </mat-card>
 
-        <mat-card class="stat-card">
+        <mat-card class="stat-card" [class.active]="isFilterActive('resolved')" (click)="filterConcerns('resolved')">
           <mat-card-content>
             <div class="stat-content">
               <mat-icon class="stat-icon" style="color: green;">check_circle</mat-icon>
@@ -100,7 +100,7 @@ interface DashboardStats {
           </mat-card-content>
         </mat-card>
 
-        <mat-card class="stat-card">
+        <mat-card class="stat-card" [class.active]="isFilterActive('pending')" (click)="filterConcerns('pending')">
           <mat-card-content>
             <div class="stat-content">
               <mat-icon class="stat-icon" color="accent">pending</mat-icon>
@@ -118,18 +118,30 @@ interface DashboardStats {
         <mat-card-header>
           <mat-card-title>
             <mat-icon>history</mat-icon>
-            Recent Concerns
+            {{ getActiveFilterDisplay() }}
           </mat-card-title>
-          <mat-card-subtitle>Your latest submissions</mat-card-subtitle>
+          <mat-card-subtitle>
+            @if (selectedFilter() === 'all') {
+              Your latest submissions
+            } @else {
+              {{filteredConcerns().length}} concern(s) found
+            }
+          </mat-card-subtitle>
+          <!-- Add clear filter button if filter is active -->
+          @if (selectedFilter() !== 'all') {
+            <button mat-icon-button (click)="filterConcerns('all')" matTooltip="Clear filter">
+              <mat-icon>clear</mat-icon>
+            </button>
+          }
         </mat-card-header>
         
         <mat-card-content>
           @if (isLoading()) {
             <div class="loading-container">
               <mat-spinner diameter="30"></mat-spinner>
-              <p>Loading recent concerns...</p>
+              <p>Loading concerns...</p>
             </div>
-          } @else if (recentConcerns().length === 0) {
+          } @else if (filteredConcerns().length === 0 && selectedFilter() === 'all') {
             <div class="empty-state">
               <mat-icon>inbox</mat-icon>
               <p>No concerns submitted yet</p>
@@ -137,9 +149,17 @@ interface DashboardStats {
                 Submit Your First Concern
               </button>
             </div>
+          } @else if (filteredConcerns().length === 0) {
+            <div class="empty-state">
+              <mat-icon>filter_list_off</mat-icon>
+              <p>No {{selectedFilter()}} concerns found</p>
+              <button mat-button (click)="filterConcerns('all')">
+                View All Concerns
+              </button>
+            </div>
           } @else {
             <div class="concerns-list">
-              @for (concern of recentConcerns(); track concern.id) {
+              @for (concern of filteredConcerns(); track concern.id) {
                 <div class="concern-item" [routerLink]="['/citizen/track', concern.id]">
                   <div class="concern-header">
                     <h4>{{concern.title}}</h4>
@@ -444,6 +464,31 @@ interface DashboardStats {
       width: 16px;
       height: 16px;
     }
+
+    .stat-card.active {
+      background-color: #e3f2fd;
+      border: 2px solid #1976d2;
+      transform: translateY(-2px);
+    }
+
+    .stat-card.active .stat-icon {
+      color: #1976d2 !important;
+    }
+
+    .stat-card.active .stat-details h3 {
+      color: #1976d2;
+    }
+
+    .recent-concerns mat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .recent-concerns mat-card-title {
+      flex: 1;
+    }
+
     
     @media (max-width: 600px) {
       .header-section h1 {
@@ -497,6 +542,7 @@ export class CitizenDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.selectedFilter.set('all'); // Set initial filter
     this.loadDashboardData();
     this.checkOfflineStatus();
   }
@@ -525,26 +571,73 @@ export class CitizenDashboardComponent implements OnInit {
     });
   }
 
+  selectedFilter = signal<string>('all');
+  filteredConcerns = signal<Concern[]>([]);
+  allConcerns = signal<Concern[]>([]);
+
   private async loadUserConcerns(userId: string) {
     try {
-      // Get concerns for the current user (limit to recent 5)
       const response = await this.apiService.getConcerns({ 
         page: 1, 
-        limit: 5 
+        limit: 20 // Increase limit to get more concerns for filtering
       }).toPromise();
       
       if (response) {
-        // Filter concerns by current user (assuming we have citizenId field)
         const userConcerns = response.data.filter(concern => concern.citizenId === userId);
-        this.recentConcerns.set(userConcerns);
-        
-        // Calculate user-specific stats
+        this.allConcerns.set(userConcerns);
+        this.recentConcerns.set(userConcerns.slice(0, 5)); // Show recent 5 initially
+        this.filteredConcerns.set(userConcerns); // Initialize filtered concerns
         this.calculateUserStats(userConcerns);
       }
     } catch (error) {
       console.error('Failed to load user concerns:', error);
       throw error;
     }
+  }
+
+  // Add filter methods
+  filterConcerns(filterType: string) {
+    this.selectedFilter.set(filterType);
+    const allConcerns = this.allConcerns();
+    
+    let filtered: Concern[] = [];
+    
+    switch (filterType) {
+      case 'total':
+        filtered = allConcerns;
+        break;
+      case 'pending':
+        filtered = allConcerns.filter(c => 
+          c.status === ConcernStatus.New || c.status === ConcernStatus.Acknowledged
+        );
+        break;
+      case 'inProgress':
+        filtered = allConcerns.filter(c => c.status === ConcernStatus.InProgress);
+        break;
+      case 'resolved':
+        filtered = allConcerns.filter(c => c.status === ConcernStatus.Resolved);
+        break;
+      default:
+        filtered = allConcerns.slice(0, 5); // Show recent 5 for 'all'
+    }
+    
+    this.filteredConcerns.set(filtered);
+  }
+
+  // Add method to get active filter display
+  getActiveFilterDisplay(): string {
+    switch (this.selectedFilter()) {
+      case 'total': return 'All Submitted Concerns';
+      case 'pending': return 'Pending Concerns';
+      case 'inProgress': return 'In Progress Concerns';
+      case 'resolved': return 'Resolved Concerns';
+      default: return 'Recent Concerns';
+    }
+  }
+
+  // Add method to check if a filter is active
+  isFilterActive(filterType: string): boolean {
+    return this.selectedFilter() === filterType;
   }
 
   private async loadAnalytics() {

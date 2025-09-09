@@ -2,8 +2,11 @@
   <mat-toolbar color="primary" class="app-toolbar">
     <mat-toolbar-row>
       <span class="toolbar-title">
-        <mat-icon>assignment_turned_in</mat-icon>
-        {{ getAppTitle() }}
+        <a class="toolbar-title" [routerLink]="['/']">
+          <img src="/assets/images/citizen-sphere-logo.png" alt="Citizen Sphere Logo" class="app-logo">
+
+          {{ getAppTitle() }}
+        </a>
       </span>
       
       <div class="toolbar-spacer"></div>

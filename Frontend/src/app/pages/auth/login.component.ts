@@ -24,13 +24,17 @@ import { AuthService } from '../../core/services/auth.service';
   ],
   template: `
     <div class="login-container">
+       
       <mat-card class="login-card">
-        <mat-card-header>
-          <mat-card-title>Login to Citizen Sphere</mat-card-title>
+        <div class="login-logo">
+          <img src="assets/images/citizen-sphere-logo.png" alt="Citizen Sphere Logo" class="app-logo">
+        </div>
+        <mat-card-header class="header-with-padding">
+          <mat-card-title>Login</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <form (ngSubmit)="onLogin()">
-            <mat-form-field class="full-width">
+            <mat-form-field class="full-width" appearance="outline">
               <mat-label>Email</mat-label>
               <input
                 matInput
@@ -41,7 +45,7 @@ import { AuthService } from '../../core/services/auth.service';
               />
             </mat-form-field>
 
-            <mat-form-field class="full-width">
+            <mat-form-field class="full-width" appearance="outline">
               <mat-label>Password</mat-label>
               <input
                 matInput
@@ -83,7 +87,7 @@ import { AuthService } from '../../core/services/auth.service';
         align-items: center;
         min-height: 100vh;
         padding: 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #667eea 0%, #009ca6 100%);
         position: relative;
         z-index: 1;
       }
@@ -107,6 +111,9 @@ import { AuthService } from '../../core/services/auth.service';
         margin-top: 16px;
         text-align: center;
       }
+      .header-with-padding {
+        padding-bottom: 20px;
+      }
       mat-form-field {
         position: relative;
         z-index: 3;
@@ -114,7 +121,29 @@ import { AuthService } from '../../core/services/auth.service';
       mat-form-field input {
         cursor: text !important;
         pointer-events: auto !important;
+        background-color: transparent !important;
+        background: none !important;
       }
+     
+      /* Remove background from Material Design input field */
+      ::ng-deep .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+        background-color: transparent !important;
+      }
+     
+      ::ng-deep .mat-mdc-form-field .mdc-text-field {
+        background-color: transparent !important;
+      }
+     
+      ::ng-deep .mat-mdc-form-field .mdc-text-field--filled {
+        background-color: transparent !important;
+      }
+      app-logo {
+        height: 58px; // Adjust height as needed
+        width: auto;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
     `,
   ],
 })

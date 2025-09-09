@@ -78,3 +78,55 @@
   padding: 24px;
   min-height: calc(100vh - 64px);
 }
+
+.toolbar-title a {
+  text-decoration: none !important;
+  color: inherit !important;
+  cursor: default;
+}
+
+.toolbar-title a:visited,
+.toolbar-title a:hover,
+.toolbar-title a:active,
+.toolbar-title a:link {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.toolbar-title a mat-icon {
+  color: inherit !important;
+}
+
+.app-logo {
+  height: 58px; // Adjust height as needed
+  width: auto;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.toolbar-title {
+  display: flex;
+  align-items: center;
+  
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    color: inherit !important;
+    
+    &:visited,
+    &:hover,
+    &:active,
+    &:link {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+  .app-logo {
+    height: 28px; // Smaller on mobile
+  }
+}
