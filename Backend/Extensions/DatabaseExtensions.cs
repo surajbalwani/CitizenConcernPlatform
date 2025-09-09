@@ -21,10 +21,12 @@ public static class DatabaseExtensions
 
         // Use SQL Server for all environments
         logger.LogInformation("Using SQL Server database provider");
-        var fallbackConnectionString = connectionString ?? "Server=(localdb)\\mssqllocaldb;Database=CitizenConcernDB;Trusted_Connection=true;MultipleActiveResultSets=true";
+        var finalConnectionString = connectionString ?? "Server=(localdb)\\mssqllocaldb;Database=CitizenConcernDB;Trusted_Connection=true;MultipleActiveResultSets=true";
+        
+        logger.LogInformation($"Using connection string: {(finalConnectionString.Contains("database.windows.net") ? "Azure SQL (Heroku)" : "LocalDB")}");
         
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(fallbackConnectionString, ConfigureSqlServer));
+            options.UseSqlServer(finalConnectionString, ConfigureSqlServer));
 
         return services;
     }
