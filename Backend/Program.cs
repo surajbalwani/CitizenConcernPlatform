@@ -3,41 +3,15 @@ using Microsoft.AspNetCore.Identity;
 using CitizenConcernAPI.Data;
 using CitizenConcernAPI.Models;
 using CitizenConcernAPI.Services;
+using CitizenConcernAPI.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure database connection
-var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ?? builder.Configuration.GetConnectionString("DefaultConnection");
-
-// Parse Heroku DATABASE_URL format if present
-if (!string.IsNullOrEmpty(connectionString) && connectionString.StartsWith("postgres://"))
-{
-    var uri = new Uri(connectionString);
-    var host = uri.Host;
-    var port = uri.Port;
-    var database = uri.LocalPath.TrimStart('/');
-    var user = uri.UserInfo.Split(':')[0];
-    var password = uri.UserInfo.Split(':')[1];
-    
-    connectionString = $"Host={host};Port={port};Database={database};Username={user};Password={password};SSL Mode=Require;Trust Server Certificate=true";
-}
-
-// Choose database provider based on connection string
-if (!string.IsNullOrEmpty(connectionString) && connectionString.Contains("Host="))
-{
-    // PostgreSQL for Heroku
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseNpgsql(connectionString, npgsqlOptions => npgsqlOptions.UseNetTopologySuite()));
-}
-else
-{
-    // SQL Server for local development
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(connectionString, sqlOptions => sqlOptions.UseNetTopologySuite()));
-}
+// Configure database connection with multi-provider support
+builder.Services.AddDatabaseProvider(builder.Configuration, builder.Environment);
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {

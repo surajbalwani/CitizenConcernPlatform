@@ -25,8 +25,8 @@ Your Citizen Sphere platform will be deployed as:
 │  Backend (.NET Core API)                       │
 │  └── citizen-sphere-backend.herokuapp.com      │
 ├────────────────────────────────────────────────┤
-│  Database (PostgreSQL)                         │
-│  └── Heroku Postgres Essential-0               │
+│  Database (Softtrends MSSQL)                   │
+│  └── Softtrends MSSQL Micro                    │
 └────────────────────────────────────────────────┘
 ```
 
@@ -72,8 +72,8 @@ heroku login
 # Create backend app (using team: runtimeterror)
 heroku create citizen-sphere-backend --region eu --team runtimeterror
 
-# Add PostgreSQL database
-heroku addons:create heroku-postgresql:essential-0 --app citizen-sphere-backend
+# Add Softtrends MSSQL database
+heroku addons:create mssql:micro --app citizen-sphere-backend
 
 # Set environment variables
 heroku config:set ASPNETCORE_ENVIRONMENT=Production --app citizen-sphere-backend
@@ -181,14 +181,15 @@ heroku config:set VARIABLE_NAME=value --app APP_NAME
 ### Database Management
 
 ```bash
-# Access database
-heroku pg:psql --app citizen-sphere-backend
+# View addon details
+heroku addons:info mssql --app citizen-sphere-backend
 
-# View database info
-heroku pg:info --app citizen-sphere-backend
+# Access database connection info
+heroku config:get DATABASE_URL --app citizen-sphere-backend
 
-# Create database backup
-heroku pg:backups:capture --app citizen-sphere-backend
+# Note: Database access is through Azure SQL Database tools
+# Use SQL Server Management Studio or Azure Data Studio for direct access
+# Backups are managed automatically by Azure SQL
 ```
 
 ### Scaling

@@ -33,9 +33,9 @@ fi
 echo -e "${YELLOW}🏗️  Creating Heroku app: ${APP_NAME}${NC}"
 heroku create $APP_NAME --region eu --team $TEAM_NAME 2>/dev/null || echo "App might already exist, continuing..."
 
-# Add PostgreSQL addon
-echo -e "${YELLOW}🗄️  Adding PostgreSQL database...${NC}"
-heroku addons:create heroku-postgresql:essential-0 --app $APP_NAME 2>/dev/null || echo "PostgreSQL addon might already exist, continuing..."
+# Add Softtrends MSSQL addon
+echo -e "${YELLOW}🗄️  Adding Softtrends MSSQL database...${NC}"
+heroku addons:create mssql:micro --app $APP_NAME 2>/dev/null || echo "MSSQL addon might already exist, continuing..."
 
 # Set environment variables
 echo -e "${YELLOW}⚙️  Setting environment variables...${NC}"
