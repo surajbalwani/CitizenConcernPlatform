@@ -65,15 +65,6 @@ interface CapturedImage {
             </mat-form-field>
 
             <mat-form-field class="full-width">
-              <mat-label>Category</mat-label>
-              <mat-select formControlName="category">
-                @for (category of availableCategories(); track category) {
-                <mat-option [value]="category">{{ category }}</mat-option>
-                }
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field class="full-width">
               <mat-label>Description</mat-label>
               <textarea
                 matInput
@@ -225,10 +216,6 @@ interface CapturedImage {
                 <p>
                   <strong>Title:</strong>
                   {{ basicInfoForm.get('title')?.value }}
-                </p>
-                <p>
-                  <strong>Category:</strong>
-                  {{ basicInfoForm.get('category')?.value }}
                 </p>
                 <p>
                   <strong>Description:</strong>
@@ -416,7 +403,6 @@ export class SubmitConcernComponent implements OnInit {
   gettingLocation = signal(false);
   isSubmitting = signal(false);
   capturedImages = signal<CapturedImage[]>([]);
-  availableCategories = signal<string[]>([]);
   errorMessage = signal('');
 
   constructor(
@@ -426,9 +412,9 @@ export class SubmitConcernComponent implements OnInit {
     private apiService: ApiService,
     private router: Router
   ) {
+    // Removed category from form validation
     this.basicInfoForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
-      category: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(10)]],
     });
 
@@ -441,47 +427,18 @@ export class SubmitConcernComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadCategories();
+    // Removed loadCategories() call
   }
 
-  private loadCategories() {
-    this.apiService.getCategories().subscribe({
-      next: (categories) => {
-        const categorynames = categories.length
-          ? categories.map((cat) => cat.name)
-          : [];
-        this.availableCategories.set(categorynames);
-      },
-      error: (error) => {
-        console.error('Failed to load categories:', error);
-        // Fallback to default categories
-        this.availableCategories.set([
-          'Infrastructure',
-          'Water',
-          'Electricity',
-          'Health',
-          'Environment',
-          'Transport',
-          'Education',
-          'Safety',
-          'Housing',
-        ]);
-      },
-    });
-  }
+  // Removed loadCategories() method and availableCategories signal
 
   startVoiceInput() {
     if (this.isListening()) {
-      // Stop voice input
       this.isListening.set(false);
-      // Implementation would call voice service to stop
     } else {
       this.isListening.set(true);
-      // Implementation would call voice service to start
-      // For now, just simulate
       setTimeout(() => {
         this.isListening.set(false);
-        // Mock adding voice input to description
         const currentDescription =
           this.basicInfoForm.get('description')?.value || '';
         this.basicInfoForm.patchValue({
@@ -495,7 +452,6 @@ export class SubmitConcernComponent implements OnInit {
   getCurrentLocation() {
     this.gettingLocation.set(true);
 
-    // Mock location service - in real implementation, would use Geolocation API
     setTimeout(() => {
       this.locationForm.patchValue({
         address: '123 Mock Street, Sample City, State 12345',
@@ -505,15 +461,24 @@ export class SubmitConcernComponent implements OnInit {
     }, 2000);
   }
 
+  private currentImageIndex = 0;
+  private sampleImages = [
+    'assets/images/pothole.jpg',
+    'assets/images/pothole2.jpg',
+    'assets/images/pothole3.jpg',
+  ];
+
   capturePhoto() {
-    // Mock camera capture - in real implementation, would use camera API
-    const mockImage: CapturedImage = {
+    const imageUrl = this.sampleImages[this.currentImageIndex % this.sampleImages.length];
+    this.currentImageIndex++;
+
+    const capturedImage: CapturedImage = {
       id: Date.now().toString(),
-      url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2RkZCIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+UGhvdG88L3RleHQ+PC9zdmc+',
+      url: imageUrl,
       name: `photo_${Date.now()}.jpg`,
     };
 
-    this.capturedImages.update((images) => [...images, mockImage]);
+    this.capturedImages.update((images) => [...images, capturedImage]);
   }
 
   removeImage(imageId: string) {
@@ -562,7 +527,6 @@ export class SubmitConcernComponent implements OnInit {
       this.apiService.createConcern(concernRequest).subscribe({
         next: (response) => {
           this.isSubmitting.set(false);
-          // Navigate to citizen dashboard with success message
           this.router.navigate(['/citizen/dashboard'], {
             queryParams: { submitted: 'true' },
           });
