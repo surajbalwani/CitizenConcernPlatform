@@ -4,7 +4,8 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "OpenAI-ApiKey": ""
       },
       "applicationUrl": "https://localhost:7001;http://localhost:7002"
     }

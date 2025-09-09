@@ -127,11 +127,12 @@ namespace CitizenConcernAPI.Controllers
                     };
                 }
 
-                var result = _aiService.ClassifyConcernAsync(concern.Title, concern.Description);
+                var result = await _aiService.ClassifyConcernAsync(concern.Title, concern.Description);
                 concern.Category = result.Category ?? string.Empty;
-                concern.SentimentScore = result.Sentiment;
+                concern.SentimentScore = result.SentimentScore;
                 concern.Priority = result.Priority;
                 concern.Tags = result.Keywords?.Take(5).ToList() ?? [];
+                concern.SubCategory = result.SdgGoal ?? string.Empty;
 
                 _context.Concerns.Add(concern);
                 await _context.SaveChangesAsync();

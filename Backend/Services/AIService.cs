@@ -7,17 +7,18 @@ namespace CitizenConcernAPI.Services
 {
     public class ClassificationResult
     {
-        public string? Category { get; set; }
-        public float Sentiment { get; set; }
-        public int Priority { get; set; }
-        public string[]? Keywords { get; set; }
+        public string Category { get; set; } = string.Empty;
+        public double SentimentScore { get; set; } // -1.0 to 1.0
+        public int Priority { get; set; }          // 0 to 5
+        public string SdgGoal { get; set; } = string.Empty;
+        public List<string> Keywords { get; set; } = new();
     }   
     public interface IAIService
     {
         Task<string> CategorizeConcernAsync(string title, string description);
         Task<int> PrioritizeConcernAsync(Concern concern);
         Task<double> AnalyzeSentimentAsync(string text);
-        ClassificationResult ClassifyConcernAsync(string title, string description);
+        Task<ClassificationResult> ClassifyConcernAsync(string title, string description);
         Task<List<string>> ExtractKeywordsAsync(string text);
     }
 
@@ -159,7 +160,7 @@ namespace CitizenConcernAPI.Services
             return stopWords.Contains(word);
         }
 
-        public ClassificationResult ClassifyConcernAsync(string title, string description)
+        Task<ClassificationResult> IAIService.ClassifyConcernAsync(string title, string description)
         {
             throw new NotImplementedException();
         }
