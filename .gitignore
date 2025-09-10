@@ -1,116 +1,43 @@
-# Visual Studio
-.vs/
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Backend - Build results
-Backend/[Dd]ebug/
-Backend/[Dd]ebugPublic/
-Backend/[Rr]elease/
-Backend/[Rr]eleases/
-Backend/x64/
-Backend/x86/
-Backend/[Aa][Rr][Mm]/
-Backend/[Aa][Rr][Mm]64/
-Backend/bld/
-Backend/[Bb]in/
-Backend/[Oo]bj/
-Backend/[Ll]og/
-Backend/[Ll]ogs/
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
 
-# Backend - .NET Core
-Backend/project.lock.json
-Backend/project.fragment.lock.json
-Backend/artifacts/
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
 
-# Backend - User-specific files
-Backend/*.rsuser
-Backend/*.suo
-Backend/*.user
-Backend/*.userosscache
-Backend/*.sln.docstates
-Backend/*.userprefs
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# Backend - Build artifacts
-Backend/*.ilk
-Backend/*.meta
-Backend/*.obj
-Backend/*.iobj
-Backend/*.pch
-Backend/*.pdb
-Backend/*.ipdb
-Backend/*.pgc
-Backend/*.pgd
-Backend/*.rsp
-Backend/*.sbr
-Backend/*.tlb
-Backend/*.tli
-Backend/*.tlh
-Backend/*.tmp
-Backend/*.tmp_proj
-Backend/*_wpftmp.csproj
-Backend/*.log
-Backend/*.vspscc
-Backend/*.vssscc
-Backend/.builds
-Backend/*.pidb
-Backend/*.svclog
-Backend/*.scc
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
-# Backend - Environment variables and secrets
-Backend/.env
-Backend/.env.local
-Backend/.env.development
-Backend/.env.production
-Backend/appsettings.Development.json
-Backend/appsettings.Production.json
-Backend/secrets.json
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+/.claude
 
-# Backend - Database files
-Backend/*.db
-Backend/*.sqlite
-Backend/*.sqlite3
-Backend/*.mdf
-Backend/*.ldf
-Backend/*.ndf
-
-# Backend - Package managers
-Backend/packages/
-Backend/node_modules/
-
-# Backend - Application Insights
-Backend/ApplicationInsights.config
-
-# Backend - Azure Functions
-Backend/local.settings.json
-
-# Frontend - Node.js
-Frontend/node_modules/
-Frontend/dist/
-Frontend/.angular/
-Frontend/.tmp/
-Frontend/.sass-cache/
-
-# Frontend - Environment files
-Frontend/.env
-Frontend/.env.local
-Frontend/.env.development.local
-Frontend/.env.test.local
-Frontend/.env.production.local
-
-# Frontend - Build outputs
-Frontend/build/
-Frontend/coverage/
-Frontend/*.tgz
-Frontend/*.tar.gz
-
-# OS
+# System files
 .DS_Store
 Thumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# IDEs
-.idea/
-.vscode/
-*.swp
-*.swo
-.claude
