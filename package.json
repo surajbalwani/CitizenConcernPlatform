@@ -1,21 +1,23 @@
 {
   "name": "frontend",
   "version": "0.0.0",
-  
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start" : "node server.js",
     "build": "ng build --configuration production",
     "build:heroku": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "heroku-postbuild": "ng build — prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.14",
     "@angular/cdk": "^19.2.19",
+    "@angular/cli": "^19.2.15",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
+    "@angular/compiler-cli": "^19.2.0",
     "@angular/core": "^19.2.0",
     "@angular/forms": "^19.2.0",
     "@angular/material": "^19.2.19",
@@ -27,13 +29,14 @@
     "ag-grid-angular": "^34.1.2",
     "ag-grid-community": "^34.1.2",
     "chart.js": "^4.5.0",
+    "express": "^5.1.0",
     "leaflet": "^1.9.4",
     "ng2-charts": "^8.0.0",
+    "path": "^0.12.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0",
-    "@angular/cli": "^19.2.15",
-    "@angular/compiler-cli": "^19.2.0"
+    "typescript": "~5.7.2",
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.15",
@@ -47,5 +50,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
+  },
+  "engines": {
+    "node": "20.19.0",
+    "npm": "10.8.2"
   }
 }
