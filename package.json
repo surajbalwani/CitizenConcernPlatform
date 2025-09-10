@@ -8,7 +8,7 @@
     "build:heroku": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "heroku-postbuild": "ng build --configuration production"
+    "heroku-postbuild": "“heroku-postbuild”: “ng build --prod”"
   },
   "private": true,
   "dependencies": {
